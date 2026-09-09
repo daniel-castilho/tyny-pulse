@@ -27,6 +27,7 @@ Official Domain: [https://tyny.ca](https://tyny.ca)
 - [Automation & JS Scripting Sandbox](#automation--js-scripting-sandbox)
 - [Protocol Support](#protocol-support)
 - [Security & Local-First Philosophy](#security--local-first-philosophy)
+- [Current State](#current-state)
 - [Roadmap](#roadmap)
 - [Documentation & License](#documentation--license)
 
@@ -331,6 +332,27 @@ Libraries are bundled at build time (`src-tauri/assets/script-libs/`, see `THIRD
 
 ---
 
+## Current State
+
+**Version `1.0.0`** (initial public release, 2026-08-25) · under active development.
+
+Tyny Pulse has shipped its full base platform and is now iterating toward the broader product vision. The `main` branch is currently focused on **Phase 16 — Advanced Collaboration & Presence** (live avatars/presence and a merge/diff conflict-resolution UI). The always-current phase map is the source of truth in [docs/progress.md](docs/progress.md); versioned release notes live in [CHANGELOG.md](CHANGELOG.md).
+
+Shipped on `main` (all epics closed and CI-gated):
+
+- **Multi-protocol core** — REST, GraphQL, WebSocket and gRPC (mock hub).
+- **QuickJS scripting sandbox** with the Postman-compatible `pm.*` API and curated `require()` libraries (lodash, dayjs, crypto-js, uuid).
+- **AES-256-GCM local vault** (Argon2 key derivation) for encrypted secrets at rest.
+- **Git-native collaboration panel** — stage, commit, branch, push/pull with interactive JSON diffs.
+- **Headless CLI** (`tyny-cli`) with JSON/JUnit reports and CI-friendly exit codes.
+- **Tokio load-testing engine** (1–500 VUs, real-time streaming metrics).
+- **SpecHub** — OpenAPI 3.0/3.1 authoring with a structural governance linter.
+- **Zero type-drift IPC** (39 `ts-rs` bindings enforced by CI) and **coverage gates** (80% lines/functions on both stacks).
+
+Known limitations (tracked in [CHANGELOG.md](CHANGELOG.md)): gRPC is currently mock-only (native streaming transport is planned), AWS SigV4 ships with placeholder signatures, and the Gemini AI features require an API key (a fully-offline Ollama provider is scheduled).
+
+---
+
 ## Roadmap
 
 - [x] Multi-protocol core execution (REST, GraphQL, WS, gRPC)
@@ -344,6 +366,7 @@ Libraries are bundled at build time (`src-tauri/assets/script-libs/`, see `THIRD
 - [x] Tokio load testing engine (P4): 1–500 VUs with ramp-up, lock-free `mpsc` aggregation, live `load_test_progress` events at 200ms, real-time RPS/latency/status charts, JSON & Markdown report export
 - [x] Collection Runner with exportable HTML/Markdown reports (shared Rust renderers power both the GUI export and the headless CLI `--format html`)
 - [ ] Cloud sync opt-in via `tyny.ca` relay
+- [ ] Phase 16 — Advanced Collaboration & Presence: live avatars, conflict-resolution UI (CRDT)
 
 ---
 
@@ -354,6 +377,7 @@ Libraries are bundled at build time (`src-tauri/assets/script-libs/`, see `THIRD
 | [`README.md`](README.md)               | Project overview, architecture, setup, and scripting guide         |
 | [`AGENTS.md`](AGENTS.md)               | Guidelines for AI agents and human contributors                    |
 | [`docs/progress.md`](docs/progress.md) | Feature implementation roadmap & architectural milestones          |
+| [`CHANGELOG.md`](CHANGELOG.md)         | Release history (Keep a Changelog)                                 |
 | [`LICENSE`](LICENSE)                   | MIT License — full legal text of the project's open-source license |
 
 Tyny Pulse is released under the **MIT License**. See the [`LICENSE`](LICENSE) file for details.
